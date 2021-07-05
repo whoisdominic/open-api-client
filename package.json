@@ -36,5 +36,9 @@
     "ts-node": "^8.10.1",
     "typescript": "^3.9.3",
     "typescript-eslint-parser": "^22.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "openapi-types": "^9.0.3"
   }
 }

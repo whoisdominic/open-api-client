@@ -1,13 +1,22 @@
-interface Params {
-  isValid: boolean;
-}
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-export default function func({ isValid }: Params) {
-  let foo = 1;
+export class HttpClient {
+  protected readonly instance: AxiosInstance;
 
-  if (isValid) {
-    foo = 2;
+  public constructor(baseURL: string) {
+    this.instance = axios.create({
+      baseURL,
+    });
+    this.initializeResponseInterceptor();
   }
 
-  return foo;
+  private initializeResponseInterceptor = () => {
+    this.instance.interceptors.response.use(this.handleResponse, this.handleError);
+  };
+
+  private handleResponse = ({ data }: AxiosResponse) => data;
+
+  protected handleError = (error: any) => Promise.reject(error);
 }
+
+export default HttpClient;
